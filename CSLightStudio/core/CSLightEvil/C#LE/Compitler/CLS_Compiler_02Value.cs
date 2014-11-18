@@ -25,13 +25,12 @@ namespace CSLE
                 else
                 {
                     CLS_Value_Value<int> number = new CLS_Value_Value<int>();
-                    if (value.text.Contains("'"))
+                    var b = int.TryParse(value.text, out number.value_value);
+                    if (!b)
                     {
-                        number.value_value = (int)value.text[1];
-                    }
-                    else
-                    {
-                        number.value_value = int.Parse(value.text);
+                        CLS_Value_Value<long> number2 = new CLS_Value_Value<long>();
+                        long.TryParse(value.text, out number2.value_value);
+                        return number2;
                     }
                     return number;
                 }
